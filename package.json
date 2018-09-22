@@ -1,0 +1,45 @@
+{
+  "name": "api-test",
+  "version": "1.0.0",
+  "description": "trying my api",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "monitor": "nodemon app.js",
+    "deploy": "gcloud app deploy app.yaml"
+  },
+  "author": "Me",
+  "semistandard": {
+    "globals": [
+      "after",
+      "afterEach",
+      "before",
+      "beforeEach",
+      "describe",
+      "it"
+    ]
+  },
+  "dependencies": {
+    "base26": "^0.1.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "firebase-admin": "^5.12.1",
+    "md5": "^2.2.1",
+    "moment-timezone": "^0.5.17",
+    "mongodb": "^3.1.0-beta4",
+    "node-mailjet": "^3.2.1",
+    "nodemailer": "^4.6.8",
+    "opentok": "^2.6.2",
+    "stripe": "^6.0.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1"
+  },
+  "engines": {
+    "node": ">=4.3.2"
+  }
+}
