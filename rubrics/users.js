@@ -74,7 +74,26 @@ function updatepass(parameters,cb) {
 	cb();
 }
 
+// -----------------------------------------------------
+// -----------------------------------------------------
+function get(parameters,cb) {
+	const collection = parameters.connection.collection('users');
+	let { index, limit } = parameters.input;
+	index = parseInt(index);
+	limit = parseInt(limit);
+	const from = index*limit; 
+
+	collection.count({},function(err,nusers){
+		collection.find({},{})
+			.skip(from).limit(limit)
+			.toArray(function (err, users) {
+				cb({users, nusers});
+			});
+	});
+}
+
 exports.signup=signup;
 exports.signin=signin;
 exports.requestpass=requestpass;
 exports.updatepass=updatepass;
+exports.get=get;

@@ -222,7 +222,48 @@ const report = (parameters,cb) => {
 	);
 }
 
+
+// -----------------------------------------------------
+// -----------------------------------------------------
+const get = (parameters, cb) => {
+	var collection = parameters.connection.collection('cardpool');
+
+	let { index, limit } = parameters.input;
+	index = parseInt(index);
+	limit = parseInt(limit);
+	const from = index*limit; 
+
+	collection.count({},function(err,ncards){
+		collection.find({},{})
+			.skip(from).limit(limit)
+			.toArray(function (err, cards) {
+				cb({cards, ncards});
+			});
+	});
+
+}
+
+// -----------------------------------------------------
+// -----------------------------------------------------
+const getUserCards = (parameters,cb) => {
+	const msPerDay=24*60*60*1000;
+	var collection=parameters.connection.collection('vocab');
+	var input=parameters.input;
+	var servertime=Date.now();
+
+	const query={
+		learnerid:input.learnerid
+	};
+
+	collection.find(query,{})
+		.toArray(function (err, cards) {
+			cb({cards, servertime});
+		});
+}
+
 // -----------------------------------------------------
 // -----------------------------------------------------
 exports.report = report;
 exports.getTen = getTen; 
+exports.get = get;
+exports.getUserCards = getUserCards;
